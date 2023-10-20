@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "name": "Cloud Description",
+    "description": "Описание признаков облаков",
+    "schemaVersion": "1"
+  },
+  "schema": [
+    {
+      "param": "ground_temperature",
+      "title": "Температура у поверхности",
+      "description": "Текущая температура у поверхности (или над водой)",
+      "unit": "C°",
+      "spec": {
+        "type": "float",
+        "min": "-200.0",
+        "max": "100.0"
+      },
+      "require": true
+    },
+    {
+      "param": "height",
+      "title": "Высота облаков",
+      "description": "Оценочная высота облаков в метрах",
+      "unit": "m",
+      "spec": {
+        "type": "int",
+        "min": "0",
+        "max": "100000"
+      },
+      "require": false
+    },
+    {
+      "param": "thickness",
+      "title": "Толщина облаков",
+      "description": "Оценочная толщина облаков в метрах",
+      "unit": "m",
+      "spec": {
+        "type": "int",
+        "min": "1",
+        "max": "1000"
+      },
+      "require": false
+    },
+    {
+      "param": "color",
+      "title": "Цвет облаков",
+      "description": "Оценочный цвет облаков",
+      "spec": {
+        "type": "enum",
+        "data": [
+          {
+            "title": "Белый",
+            "description": "Чистый и белый цвет",
+            "image": "sample.jpg",
+            "value": "white"
+          },
+          {
+            "title": "Серый",
+            "description": "Серый цвет с темными областями",
+            "image": "sample.jpg",
+            "value": "gray"
+          },
+          {
+            "title": "Насыщенный серый",
+            "description": "Очень темные серые облака, плохо пропускающие свет",
+            "image": "sample.jpg",
+            "value": "dark_gray"
+          }
+        ]
+      },
+      "require": true
+    },
+    {
+      "param": "speed",
+      "title": "Скорость движения облаков",
+      "description": "Оценочная скорость движения облаков относительно земли в м/с",
+      "unit": "m/s",
+      "spec": {
+        "type": "float",
+        "min": "0",
+        "max": "100",
+        "predefined": [
+          {
+            "title": "Почти не движутся",
+            "value": "0"
+          },
+          {
+            "title": "Заметно движутся",
+            "value": "10"
+          },
+          {
+            "title": "Быстро движутся",
+            "value": "25"
+          },
+          {
+            "title": "Движение происходит очень быстро",
+            "value": "50"
+          },
+          {
+            "title": "...кошмар",
+            "value": "100"
+          }
+        ]
+      },
+      "require": false
+    },
+    {
+      "param": "precipitation",
+      "title": "Наличие осадков",
+      "description": "Текущая ситуация (или недавняя) касательно осадков",
+      "spec": {
+        "type": "enum",
+        "data": [
+          {
+            "title": "Осадков нет",
+            "description": "На вашу голову ничего не капает",
+            "value": "none"
+          },
+          {
+            "title": "Морось",
+            "description": "Очень мелкий дождь, Диаметр капель не более 0.5mm",
+            "value": "drizzle"
+          },
+          {
+            "title": "Ливень",
+            "description": "Сильный проливной дождь",
+            "value": "rain"
+          }
+        ]
+      },
+      "require": false
+    },
+    {
+      "param": "lightning",
+      "title": "Наличие молнии",
+      "description": "Наличие вспышек молнии или звук грома",
+      "spec": {
+        "type": "bool"
+      },
+      "require": false
+    },
+    {
+      "param": "visual_morph",
+      "title": "Визуальный вид",
+      "description": "Морфологический визуальный вид облаков",
+      "spec": {
+        "type": "enum",
+        "data": [
+          {
+            "title": "Перистые",
+            "description": "Состоят из отдельных перистообразных элементов в виде тонких нитей или клочьев и вытянутых гряд.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "cirrus"
+          },
+          {
+            "title": "Перисто-кучевые",
+            "description": "Очень высокие небольшие шаровидные облака, вытянутые в линии.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "cirrocumulus"
+          },
+          {
+            "title": "Перисто-слоистые",
+            "description": "Парусоподобные облака верхнего яруса. Имеют вид однородной, белесоватой пелены.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "cirrostratus"
+          },
+          {
+            "title": "Высококучевые",
+            "description": "Облака в виде волн и гряд, состоящих из хлопьев и пластин, разделённых просветами.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "altocumulus"
+          },
+          {
+            "title": "Высокослоистые",
+            "description": "Имеют вид однородной или слабовыраженной волнистой пелены. Солнце и Луна обычно просвечивают, но слабо.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "altostratus"
+          },
+          {
+            "title": "Высокослоистые просвечивающие",
+            "description": "Волнистая структура облака заметна, солнечный круг вполне различим. На земле иногда могут возникать вполне различимые тени. Отчётливо видны полосы. Пелена облаков, как правило, постепенно закрывает всё небо.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "altostratus_translucidus"
+          },
+          {
+            "title": "Слоисто-дождевые",
+            "description": "Облака в виде сплошного слоя. При осадках слой слоисто-дождевых облаков выглядит однородным, в перерывах между выпадением осадков заметна некая неоднородность и даже некоторая волнистость слоя.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "nimbostratus"
+          },
+          {
+            "title": "Слоисто-кучевые",
+            "description": "Облака тёмно-серые, в виде сплошного слоя. При осадках слой слоисто-дождевых облаков выглядит однородным, в перерывах между выпадением осадков заметна некая неоднородность и даже некоторая волнистость слоя.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "stratocumulus"
+          },
+          {
+            "title": "Слоистые",
+            "description": "Образуют однородный слой, сходный с туманом, но расположенный на некоторой высоте. Обычно они закрывают всё небо, но иногда могут наблюдаться в виде разорванных облачных масс. Нижний край этих облаков может опускаться очень низко, — иногда они сливаются с наземным туманом.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "stratus"
+          },
+          {
+            "title": "Кучевые облака",
+            "description": "Плотные, днём ярко-белые облака со значительным вертикальным развитием.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "cumulus"
+          },
+          {
+            "title": "Кучево-дождевые",
+            "description": "Мощные и плотные облака с сильным вертикальным развитием",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "cumulonimbus"
+          },
+          {
+            "title": "Серебристые облака",
+            "description": "Крайне разреженные облака. Видны в глубоких сумерках, непосредственно после заката или перед восходом Солнца",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "noctilucent"
+          }
+        ]
+      },
+      "require": false
+    }
+  ]
+}

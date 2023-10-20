@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "name": "Cloud Classificator",
+    "description": "Классификатор облаков на основании признаков",
+    "schemaVersion": "1"
+  },
+  "stack": [
+    {
+      "id": "type",
+      "title": "Тип облаков",
+      "description": "Тип облака определяется условием образования",
+      "limit": 1
+    },
+    {
+      "id": "morphology",
+      "title": "Морфологическая классификация",
+      "description": "На основании структуры и внешнего вида облака"
+    },
+    {
+      "id": "attention",
+      "title": "Предупреждение о опасностях",
+      "description": "Возможные опасные погодные явления, сопутствующие данному виду облаков"
+    }
+  ],
+  "graph": [
+    {
+      "type": "condition",
+      "comment": "ТИП: Конвективные облака",
+      "statements": [
+        {
+          "type": "statement",
+          "param": "ground_temperature",
+          "predicate": ">",
+          "value": "20",
+          "require": false,
+          "score": 1
+        }
+      ],
+      "graph": [
+        {
+          "type": "report",
+          "stack": "type",
+          "report": {
+            "title": "Конвективные облака",
+            "description": "Формируются за счёт неравномерного нагрева снизу и восходящего тока более тёплых воздушных масс."
+          }
+        },
+        {
+          "type": "condition",
+          "comment": "РОД: Кучевые облака",
+          "statements": [
+            {
+              "type": "statement",
+              "param": "color",
+              "predicate": "=",
+              "value": "white",
+              "require": false,
+              "score": 1
+            },
+            {
+              "type": "statement",
+              "param": "visual_morph",
+              "predicate": "=",
+              "value": "cirrocumulus",
+              "require": false,
+              "score": 1
+            }
+          ],
+          "graph": [
+            {
+              "type": "report",
+              "stack": "morphology",
+              "report": {
+                "title": "Кучевые облака",
+                "description": "Плотные, днём ярко-белые облака со значительным вертикальным развитием. Связаны с развитием конвекции в нижней и частично средней тропосфере.",
+                "requireScore": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "comment": "РОД: Кучево-дождевые облака",
+          "statements": [
+            {
+              "type": "statement",
+              "param": "color",
+              "predicate": "=",
+              "value": ["gray", "dark_gray"],
+              "require": false,
+              "score": 10
+            },
+            {
+              "type": "statement",
+              "param": "visual_morph",
+              "predicate": "=",
+              "value": "cirrocumulus",
+              "require": false,
+              "score": 1
+            }
+          ],
+          "graph": [
+            {
+              "type": "report",
+              "stack": "morphology",
+              "report": {
+                "title": "Кучево-дождевые облака",
+                "description": "Хорошо развитые по вертикали конвективные облака в виде плотной массы с тёмно-серым или чёрным основанием, под которым видны полосы падения осадков.",
+                "requireScore": 2
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
