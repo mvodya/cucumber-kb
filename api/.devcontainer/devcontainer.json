@@ -1,7 +1,7 @@
 {
 	"name": "CucumberKB API",
-	"build": {
-		"context": "..",
-		"dockerfile": "Dockerfile"
-	}
+	"dockerComposeFile": ["docker-compose.yml"],
+	"service": "api-dev",
+	"workspaceFolder": "/workspace/api",
+	"forwardPorts": ["db:5432"]
 }
