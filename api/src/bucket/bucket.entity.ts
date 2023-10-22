@@ -16,4 +16,10 @@ export class Bucket {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column('json', {nullable: true})
+  model: object;
+
+  @Column('json', {nullable: true})
+  data: object;
 }
