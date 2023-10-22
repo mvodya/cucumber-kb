@@ -1,0 +1,7 @@
+{
+	"name": "CucumberKB KbSolver",
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	}
+}
