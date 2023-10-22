@@ -1,0 +1,7 @@
+{
+	"name": "CucumberKB API",
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	}
+}
