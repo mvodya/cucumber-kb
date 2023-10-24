@@ -12,6 +12,6 @@ kbsolver-build:
     - docker push "$DOCKER_IMAGE_NAME"
     - |
       if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
+        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE/kbsolver:latest"
         docker push "$CI_REGISTRY_IMAGE/kbsolver:latest"
       fi
