@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Query, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Post, Get, Query, ParseUUIDPipe, Body, UsePipes, ValidationPipe } from '@nestjs/common';
 import { BucketService } from './bucket.service';
 import { CreateBucketDto } from './dto/create-bucket.dto';
 import { Bucket } from './bucket.entity';
@@ -20,7 +20,8 @@ export class BucketController {
   }
 
   @Post('updateData')
-  updateData(@Query('id', ParseUUIDPipe) id: string, @Query() updateDataBucketDto: UpdateDataBucketDto): Promise<Bucket> {
+  @UsePipes(new ValidationPipe({ transform: true }))
+  updateData(@Query('id', ParseUUIDPipe) id: string, @Body() updateDataBucketDto: UpdateDataBucketDto): Promise<Bucket> {
     return this.bucketService.updateData(id, updateDataBucketDto);
   }
 

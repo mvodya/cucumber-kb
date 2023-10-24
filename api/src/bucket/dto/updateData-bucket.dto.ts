@@ -1,9 +1,7 @@
 import { IsJSON } from 'class-validator';
 
 export class UpdateDataBucketDto {
-  @IsJSON()
-  model: string;
+  model: object;
 
-  @IsJSON()
-  data: string;
+  data: object;
 }

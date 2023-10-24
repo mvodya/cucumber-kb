@@ -21,7 +21,7 @@ export class ObjectReq {
   data: object;
 
   @Column('json', {nullable: true})
-  responce: object;
+  response: object;
 
   @Column({default: true})
   is_planned: boolean;

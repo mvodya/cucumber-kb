@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Query, ParseUUIDPipe, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import { Controller, Post, Get, Query, ParseUUIDPipe, UseInterceptors, ClassSerializerInterceptor, Body } from '@nestjs/common';
 import { ObjectReqService } from './objectreq.service';
 import { CreateObjectReqDto } from './dto/create-objectreq.dto';
 import { ObjectReq } from './objectreq.entity';
@@ -9,8 +9,8 @@ export class ObjectReqController {
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('create')
-  create(@Query() createObjectReqDto: CreateObjectReqDto): Promise<ObjectReq> {
-    return this.objectreqService.create(createObjectReqDto);
+  create(@Query('bucketId', ParseUUIDPipe) id: string, @Body() createObjectReqDto: CreateObjectReqDto): Promise<ObjectReq> {
+    return this.objectreqService.create(id, createObjectReqDto);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
