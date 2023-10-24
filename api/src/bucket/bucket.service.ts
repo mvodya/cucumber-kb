@@ -36,8 +36,8 @@ export class BucketService {
 
     if (bucket == null) throw new NotFoundException("Bucket not found")
 
-    if (updateDataBucketDto.model != null) bucket.model = JSON.parse(updateDataBucketDto.model);
-    if (updateDataBucketDto.data != null) bucket.data = JSON.parse(updateDataBucketDto.data);
+    if (updateDataBucketDto.model != null) bucket.model = updateDataBucketDto.model;
+    if (updateDataBucketDto.data != null) bucket.data = updateDataBucketDto.data;
 
     return this.bucketRepository.save(bucket);
   }
