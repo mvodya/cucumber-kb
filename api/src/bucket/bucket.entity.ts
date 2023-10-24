@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { ObjectReq } from 'src/objectreq/objectreq.entity';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Bucket {
@@ -22,4 +23,7 @@ export class Bucket {
 
   @Column('json', {nullable: true})
   data: object;
+
+  @OneToMany(() => ObjectReq, (objectreq) => objectreq.bucket)
+  objectreqs: ObjectReq[]
 }
