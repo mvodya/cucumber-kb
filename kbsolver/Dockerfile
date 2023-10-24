@@ -6,4 +6,4 @@ RUN pip3 install flask gunicorn pylint
 
 COPY . /app
 
-CMD ["gunicorn"  , "-w", "4", "app:app"]
+CMD ["gunicorn"  , "-b", "0.0.0.0:8000", "-w", "4", "app:app"]
