@@ -131,18 +131,17 @@ def solve(model, data, obj):
                         self.execute_nodes(self.score)
                 case 'condition':
                     self.execute_condition()
-
-                # case _:
-                #     self.execute_nodes(self.score)
         
         def execute_nodes(self, score):
             for n in self.nodes:
                 n.execute(score)
 
-    n = Node(data['graph'][0])
-
     stack_flush()
-    n.execute()
+
+    for i in data['graph']:
+        n = Node(i)
+        n.debug_tree()
+        n.execute()
 
     result = json.dumps(stack, indent=4, ensure_ascii=False)
 
