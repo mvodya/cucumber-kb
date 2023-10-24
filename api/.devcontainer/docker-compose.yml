@@ -9,6 +9,11 @@ services:
       - db
     env_file: ../.env
 
+  kbsolver:
+    build: ../../kbsolver
+    restart: always
+    env_file: ../.env
+
   db:
     image: postgres
     restart: always
