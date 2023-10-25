@@ -131,16 +131,6 @@
               "sample3.jpg"
             ],
             "value": "stratus"
-          },
-          {
-            "title": "Клочья",
-            "description": "",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
-            "value": "pannus"
           }
         ]
       },
@@ -182,41 +172,6 @@
             "description": "Синеватые облака",
             "image": "sample.jpg",
             "value": "bluish"
-          }
-        ]
-      },
-      "require": true
-    },
-    {
-      "param": "season",
-      "title": "Время года",
-      "description": "Текущее время года",
-      "spec": {
-        "type": "enum",
-        "data": [
-          {
-            "title": "Осень",
-            "description": "Осень",
-            "image": "sample.jpg",
-            "value": "autumn"
-          },
-          {
-            "title": "Зима",
-            "description": "Зима",
-            "image": "sample.jpg",
-            "value": "winter"
-          },
-          {
-            "title": "Весна",
-            "description": "Весна",
-            "image": "sample.jpg",
-            "value": "spring"
-          },
-          {
-            "title": "Лето",
-            "description": "Лето",
-            "image": "sample.jpg",
-            "value": "summer"
           }
         ]
       },
