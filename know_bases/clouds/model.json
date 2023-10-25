@@ -1,0 +1,250 @@
+{
+  "meta": {
+    "name": "Cloud Description",
+    "description": "Описание признаков облаков",
+    "schemaVersion": "2"
+  },
+  "schema": [
+    {
+      "param": "shining",
+      "title": "Солнце и Луна просвечивают",
+      "description": "Видно ли Солнце или Луну сквозь облака",
+      "spec": {
+        "type": "bool"
+      },
+      "require": true
+    },
+    {
+      "param": "height",
+      "title": "Высота облаков",
+      "description": "Оценочная высота облаков в метрах",
+      "spec": {
+        "type": "enum",
+        "data": [
+          {
+            "title": "Очень высоко",
+            "description": "Облака находятся очень высоко над землей",
+            "image": "sample.jpg",
+            "value": "very_high"
+          },
+          {
+            "title": "Высоко",
+            "description": "Облака находятся высоко над землей",
+            "image": "sample.jpg",
+            "value": "high"
+          },
+          {
+            "title": "Средне",
+            "description": "Облака находятся средне над землей, ни высоко, ни низко",
+            "image": "sample.jpg",
+            "value": "middle"
+          },
+          {
+            "title": "Низко",
+            "description": "Облака находятся низко над землей",
+            "image": "sample.jpg",
+            "value": "low"
+          },
+          {
+            "title": "Очень низко",
+            "description": "Облака находятся очень низко над землей",
+            "image": "sample.jpg",
+            "value": "very_low"
+          }
+        ]
+      },
+      "require": true
+    },
+    {
+      "param": "visual_morph",
+      "title": "Визуальный вид",
+      "description": "Морфологический визуальный вид облаков",
+      "spec": {
+        "type": "enum",
+        "data": [
+          {
+            "title": "Башенкообразные",
+            "description": "Облака, имеющие по крайней мере в некоторых местах своей верхней части кучевообразные выступы в виде башенок, делающие облака как бы зазубренными. Башенки, высота которых иногда превышает их ширину, вырастают из общего основания и кажутся расположенными рядами. Башенки особенно заметны, если смотреть на облака сбоку.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "turret-shaped"
+          },
+          {
+            "title": "Хлопьевидные",
+            "description": "Облака, имеющие вид более или менее изолированных небольших округлых хлопьев, зачастую имеющие шлейф.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "flocculent"
+          },
+          {
+            "title": "Волнистые",
+            "description": "Имеют вид однородной или слабовыраженной волнистой пелены.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "wavy"
+          },
+          {
+            "title": "Гряды",
+            "description": "Облака в виде гряд.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "ridge"
+          },
+          {
+            "title": "Пластины",
+            "description": "Облака в виде пластин.",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "plate"
+          },
+          {
+            "title": "Куполообразные",
+            "description": "",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "dome-shaped"
+          },
+          {
+            "title": "Слоистые",
+            "description": "",
+            "image": [
+              "sample1.jpg",
+              "sample2.jpg",
+              "sample3.jpg"
+            ],
+            "value": "stratus"
+          }
+        ]
+      },
+      "require": true
+    },
+    {
+      "param": "color",
+      "title": "Цвет облаков",
+      "description": "Оценочный цвет облаков",
+      "spec": {
+        "type": "enum",
+        "data": [
+          {
+            "title": "Белый",
+            "description": "Чистый и белый цвет",
+            "image": "sample.jpg",
+            "value": "white"
+          },
+          {
+            "title": "Серый",
+            "description": "Серый цвет с темными областями",
+            "image": "sample.jpg",
+            "value": "gray"
+          },
+          {
+            "title": "Темно серый",
+            "description": "Очень темные серые облака, плохо пропускающие свет",
+            "image": "sample.jpg",
+            "value": "dark_gray"
+          },
+          {
+            "title": "Черные",
+            "description": "Черные облака, аж жутко",
+            "image": "sample.jpg",
+            "value": "dark"
+          },
+          {
+            "title": "Синеватые",
+            "description": "Синеватые облака",
+            "image": "sample.jpg",
+            "value": "bluish"
+          }
+        ]
+      },
+      "require": true
+    },
+    {
+      "param": "season",
+      "title": "Время года",
+      "description": "Текущее время года",
+      "spec": {
+        "type": "enum",
+        "data": [
+          {
+            "title": "Осень",
+            "description": "Осень",
+            "image": "sample.jpg",
+            "value": "autumn"
+          },
+          {
+            "title": "Зима",
+            "description": "Зима",
+            "image": "sample.jpg",
+            "value": "winter"
+          },
+          {
+            "title": "Весна",
+            "description": "Весна",
+            "image": "sample.jpg",
+            "value": "spring"
+          },
+          {
+            "title": "Лето",
+            "description": "Лето",
+            "image": "sample.jpg",
+            "value": "summer"
+          }
+        ]
+      },
+      "require": true
+    },
+    {
+      "param": "speed",
+      "title": "Скорость движения облаков",
+      "description": "Оценочная скорость движения облаков относительно земли в м/с",
+      "unit": "m/s",
+      "spec": {
+        "type": "float",
+        "min": "0",
+        "max": "100",
+        "predefined": [
+          {
+            "title": "Почти не движутся",
+            "value": "0"
+          },
+          {
+            "title": "Заметно движутся",
+            "value": "10"
+          },
+          {
+            "title": "Быстро движутся",
+            "value": "25"
+          },
+          {
+            "title": "Движение происходит очень быстро",
+            "value": "50"
+          },
+          {
+            "title": "...кошмар",
+            "value": "100"
+          }
+        ]
+      },
+      "require": false
+    }
+  ]
+}

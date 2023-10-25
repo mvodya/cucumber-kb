@@ -1,0 +1,8 @@
+{
+	"name": "CucumberKB UI",
+	"dockerComposeFile": ["docker-compose.yml"],
+	"service": "ui-dev",
+	"workspaceFolder": "/workspace/ui",
+	"forwardPorts": ["db:5432", "kbsolver:8000", "api:3000"],
+	"containerUser": "node"
+}
