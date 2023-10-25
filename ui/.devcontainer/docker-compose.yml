@@ -1,0 +1,30 @@
+version: '3'
+services:
+  ui-dev:
+    build: ./cucumber-ui-devcontainer
+    volumes:
+      - ../..:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    links:
+      - db
+      - api
+    env_file: ../.env
+
+  api:
+    build: ../../api
+    links:
+      - db
+      - kbsolver
+    env_file: ../.env
+
+  kbsolver:
+    build: ../../kbsolver
+    restart: always
+    env_file: ../.env
+
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ../data/db:/var/lib/postgresql/data
+    env_file: ../.env
