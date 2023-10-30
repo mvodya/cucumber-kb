@@ -2,10 +2,10 @@ FROM node:21-bullseye-slim
 
 WORKDIR /app
 
-COPY . /app/
+COPY . /app
 
 RUN npm ci \
-    && npx next build \
+    && npm run build \
     && npm prune --production
 
 CMD ["npm", "run", "start"]
