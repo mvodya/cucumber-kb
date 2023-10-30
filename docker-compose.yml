@@ -1,0 +1,50 @@
+version: '3'
+services:
+  ui:
+    image: registry.frogling.com/gentlememes/cucumberkb/ui:latest
+    links:
+      - db
+      - api
+    env_file: .env
+    networks:
+      - proxy
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.cucumberkb.rule=Host(`cucumberkb.moonbase.mvodya.com`)"
+      - "traefik.http.routers.cucumberkb.entrypoints=http"
+      - "traefik.http.services.cucumberkb.loadbalancer.server.port=3000"
+
+  api:
+    image: registry.frogling.com/gentlememes/cucumberkb/api:latest
+    links:
+      - db
+      - kbsolver
+    env_file: .env
+    networks:
+      - internal
+
+  kbsolver:
+    image: registry.frogling.com/gentlememes/cucumberkb/kbsolver:latest
+    restart: always
+    env_file: .env
+    networks:
+      - internal
+
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - data:/var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - internal
+
+networks:
+  internal:
+  proxy:
+    external: true
+
+volumes:
+  data:
