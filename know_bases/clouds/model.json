@@ -22,12 +22,6 @@
         "type": "enum",
         "data": [
           {
-            "title": "Очень высоко",
-            "description": "Облака находятся очень высоко над землей",
-            "image": "sample.jpg",
-            "value": "very_high"
-          },
-          {
             "title": "Высоко",
             "description": "Облака находятся высоко над землей",
             "image": "sample.jpg",
@@ -44,12 +38,6 @@
             "description": "Облака находятся низко над землей",
             "image": "sample.jpg",
             "value": "low"
-          },
-          {
-            "title": "Очень низко",
-            "description": "Облака находятся очень низко над землей",
-            "image": "sample.jpg",
-            "value": "very_low"
           }
         ]
       },
