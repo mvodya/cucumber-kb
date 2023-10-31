@@ -12,14 +12,18 @@ export default function BucketForms(props: any) {
   const [model, setModel] = useState(initialModelState)
   const [kb, setKb] = useState(initialKbState)
 
-  useEffect(()=>{
+  useEffect(() => {
     setModel(JSON.stringify(props.data.model))
   }, [])
 
   return (
-    <div className="row">
-      <div className="column"><EditorForm data={props.data} modelUpdate={setModel} dataUpdate={setKb} /></div>
-      <div className="column"><QueryForm data={props.data} model={model} kb={kb} /></div>
+    <div className="flex flex-row gap-4">
+      <div className="basis-1/2">
+        <EditorForm data={props.data} modelUpdate={setModel} dataUpdate={setKb} />
+      </div>
+      <div className="basis-1/2 bg-gray-800 rounded-2xl p-4">
+        <QueryForm data={props.data} model={model} kb={kb} />
+      </div>
     </div>
   )
 }

@@ -3,6 +3,18 @@
 import { useFormState, useFormStatus } from 'react-dom'
 import { useState, useEffect } from 'react'
 
+function QueryLabel(props: any) {
+  return (
+    <div className='text-gray-300'>{props.item.title}:</div>
+  )
+}
+
+function QueryEntryDescription(props: any) {
+  return (
+    <div className='text-gray-400 text-sm col-span-2 mb-2'>{props.item.description}</div>
+  )
+}
+
 function QueryEntry(props: any) {
   function updateQuery(e: any) {
     let q = JSON.parse(props.query);
@@ -16,10 +28,7 @@ function QueryEntry(props: any) {
   }
 
   return (
-    <div>
-      {props.item.title}<br />
-      <input type="text" name={props.item.param} onChange={updateQuery}></input><br /><br />
-    </div>
+    <input className='w-full border border-gray-600 bg-gray-700 rounded-md px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono' type="text" name={props.item.param} onChange={updateQuery}></input>
   )
 }
 
@@ -39,14 +48,11 @@ function QueryEntryBool(props: any) {
 
   return (
     <div>
-      {props.item.title}<br />
-      {/* <input type="checkbox" name={props.item.param} onChange={updateQuery}></input><br /><br /> */}
-      <select name={props.item.param} onChange={updateQuery}>
+      <select className="w-full border border-gray-600 bg-gray-700 rounded-md px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono" name={props.item.param} onChange={updateQuery}>
         <option value="null">Неизвестно</option>
         <option value="true">Да</option>
         <option value="false">Нет</option>
       </select>
-      <br /><br />
     </div>
   )
 }
@@ -71,13 +77,10 @@ function QueryEntryEnum(props: any) {
 
   return (
     <div>
-      {props.item.title}<br />
-      {/* <input type="checkbox" name={props.item.param} onChange={updateQuery}></input><br /><br /> */}
-      <select name={props.item.param} onChange={updateQuery}>
+      <select className="w-full border border-gray-600 bg-gray-700 rounded-md px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono" name={props.item.param} onChange={updateQuery}>
         <option value="null">Неизвестно</option>
         {options}
       </select>
-      <br /><br />
     </div>
   )
 }
@@ -100,21 +103,27 @@ export default function QueryList(props: any) {
     listItems = modelJson.schema.map((item: any) => {
       if (item.spec.type == "string" || item.spec.type == "float" || item.spec.type == "int") {
         return (
-          <div key={item.param}>
-            <QueryEntry item={item} query={query} setQuery={setQuery} />
-          </div>
+          [
+            <QueryLabel key={`${item.param}-label`} item={item} />,
+            <QueryEntry key={item.param} item={item} query={query} setQuery={setQuery} />,
+            <QueryEntryDescription key="{item.param}-desc" item={item} />
+          ]
         )
       } else if (item.spec.type == "bool") {
         return (
-          <div key={item.param}>
-            <QueryEntryBool item={item} query={query} setQuery={setQuery} />
-          </div>
+          [
+            <QueryLabel key={`${item.param}-label`} item={item} />,
+            <QueryEntryBool key={item.param} item={item} query={query} setQuery={setQuery} />,
+            <QueryEntryDescription key="{item.param}-desc" item={item} />
+          ]
         )
       } else if (item.spec.type == "enum") {
         return (
-          <div key={item.param}>
-            <QueryEntryEnum item={item} query={query} setQuery={setQuery} />
-          </div>
+          [
+            <QueryLabel key={`${item.param}-label`} item={item} />,
+            <QueryEntryEnum key={item.param} item={item} query={query} setQuery={setQuery} />,
+            <QueryEntryDescription key="{item.param}-desc" item={item} />
+          ]
         )
       }
     }
@@ -126,9 +135,14 @@ export default function QueryList(props: any) {
   return (
     <div>
       {isError &&
-        <p>Ошибка парсинга модели</p>
+        <div className="flex items-center text-red-500">
+          <i className="fa fa-exclamation-triangle" aria-hidden="true" />
+          <div className="ml-2">Ошибка парсинга модели</div>
+        </div>
       }
-      {listItems}
+      <div className="grid grid-cols-2 gap-2">
+        {listItems}
+      </div>
       <textarea name="object" value={query} readOnly hidden />
     </div>
   )

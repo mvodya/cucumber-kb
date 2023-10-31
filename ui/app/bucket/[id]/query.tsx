@@ -12,14 +12,15 @@ export default function QueryForm(props: any) {
 
   return (
     <form action={formAction}>
-      <p>Запрос:</p>
-      {/* <textarea name="object" defaultValue="" rows={15} cols={80}/> */}
+      <label className="block mb-2 text-lg font-bold"><i className="fa fa-flash" aria-hidden="true" /> Запрос:</label>
       <QueryList model={props.model} />
-      <br/><br/>
-      <button type="submit">ОТПРАВИТЬ В РЕШАТЕЛЬ</button>
-      <p>Решение:</p>
-      <textarea name="solve" value={JSON.stringify(state, null, 2)} rows={25} cols={80} readOnly/>
-      <input type="hidden" id="id" name="id" value={props.data.id} />
+
+      <div className="mt-8">
+        <button className="float-right rounded-md bg-yellow-700 px-3" type="submit"><i className="fa fa-cogs" aria-hidden="true" /> РЕШИТЬ</button>
+        <label className="float-left block mb-2 text-lg font-bold"><i className="fa fa-check-square" aria-hidden="true" /> Решение:</label>
+        <textarea name="solve" value={JSON.stringify(state, null, 2)} rows={15} className="w-full border border-gray-600 bg-gray-700  rounded-md py-2 px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono" readOnly />
+        <input type="hidden" id="id" name="id" value={props.data.id} />
+      </div>
     </form>
   )
 }

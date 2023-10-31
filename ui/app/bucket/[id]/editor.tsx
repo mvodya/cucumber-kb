@@ -11,17 +11,21 @@ const initialState = {
 
 export default function EditorForm(props: any) {
   const [state, formAction] = useFormState(updateBucketData, initialState)
-  // const [dataState, setData] = useState(props.data.data);
-  // const [modelState, setModel] = useState(props.data.model);
 
   return (
     <form action={formAction}>
-      <p>База знаний:</p>
-      <textarea name="data" defaultValue={JSON.stringify(props.data.data, null, 2)} rows={25} cols={80} onChange={(e) => props.dataUpdate(e.target.value)}/>
-      <p>Модель:</p>
-      <textarea name="model" defaultValue={JSON.stringify(props.data.model, null, 2)} rows={25} cols={80} onChange={(e) => props.modelUpdate(e.target.value)}/>
-      <br/><br/>
-      <button type="submit">ОБНОВИТЬ БЗ и МОДЕЛЬ</button>
+      <div className="flex flex-col gap-4">
+        <div className="bg-gray-800 rounded-2xl p-4">
+          <label className="float-left block mb-2 text-lg font-bold"><i className="fa fa-folder-open" aria-hidden="true" /> База знаний:</label>
+          <button className="float-right rounded-md bg-green-700 px-3" type="submit"><i className="fa fa-cloud-upload" aria-hidden="true" /> СОХРАНИТЬ</button>
+          <textarea name="data" placeholder="{ ... }" rows={25} defaultValue={JSON.stringify(props.data.data, null, 2)} onChange={(e) => props.dataUpdate(e.target.value)} className="w-full border border-gray-600 bg-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono"></textarea>
+        </div>
+        <div className="bg-gray-800 rounded-2xl p-4">
+          <label className="float-left block mb-2 text-lg font-bold"><i className="fa fa-cube" aria-hidden="true" /> Модель:</label>
+          <button className="float-right rounded-md bg-green-700 px-3" type="submit"><i className="fa fa-cloud-upload" aria-hidden="true" /> СОХРАНИТЬ</button>
+          <textarea name="model" placeholder="{ ... }" rows={15} defaultValue={JSON.stringify(props.data.model, null, 2)} onChange={(e) => props.modelUpdate(e.target.value)} className="w-full border border-gray-600 bg-gray-700  rounded-md py-2 px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono"></textarea>
+        </div>
+      </div>
       <input type="hidden" id="id" name="id" value={props.data.id} />
     </form>
   )
