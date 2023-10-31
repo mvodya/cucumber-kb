@@ -178,41 +178,6 @@
       "require": true
     },
     {
-      "param": "season",
-      "title": "Время года",
-      "description": "Текущее время года",
-      "spec": {
-        "type": "enum",
-        "data": [
-          {
-            "title": "Осень",
-            "description": "Осень",
-            "image": "sample.jpg",
-            "value": "autumn"
-          },
-          {
-            "title": "Зима",
-            "description": "Зима",
-            "image": "sample.jpg",
-            "value": "winter"
-          },
-          {
-            "title": "Весна",
-            "description": "Весна",
-            "image": "sample.jpg",
-            "value": "spring"
-          },
-          {
-            "title": "Лето",
-            "description": "Лето",
-            "image": "sample.jpg",
-            "value": "summer"
-          }
-        ]
-      },
-      "require": true
-    },
-    {
       "param": "speed",
       "title": "Скорость движения облаков",
       "description": "Оценочная скорость движения облаков относительно земли в м/с",
