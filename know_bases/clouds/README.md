@@ -7,6 +7,12 @@
 
 ```json
 {
-  ...
+  "data": {
+    "shining": false,
+    "visual_morph": "plate",
+    "color": "gray",
+    "height": "low"
+  }
 }
+
 ```
