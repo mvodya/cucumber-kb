@@ -24,19 +24,16 @@
           {
             "title": "Высоко",
             "description": "Облака находятся высоко над землей",
-            "image": "sample.jpg",
             "value": "high"
           },
           {
             "title": "Средне",
             "description": "Облака находятся средне над землей, ни высоко, ни низко",
-            "image": "sample.jpg",
             "value": "middle"
           },
           {
             "title": "Низко",
             "description": "Облака находятся низко над землей",
-            "image": "sample.jpg",
             "value": "low"
           }
         ]
@@ -53,71 +50,36 @@
           {
             "title": "Башенкообразные",
             "description": "Облака, имеющие по крайней мере в некоторых местах своей верхней части кучевообразные выступы в виде башенок, делающие облака как бы зазубренными. Башенки, высота которых иногда превышает их ширину, вырастают из общего основания и кажутся расположенными рядами. Башенки особенно заметны, если смотреть на облака сбоку.",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
             "value": "turret-shaped"
           },
           {
             "title": "Хлопьевидные",
             "description": "Облака, имеющие вид более или менее изолированных небольших округлых хлопьев, зачастую имеющие шлейф.",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
             "value": "flocculent"
           },
           {
             "title": "Волнистые",
             "description": "Имеют вид однородной или слабовыраженной волнистой пелены.",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
             "value": "wavy"
           },
           {
             "title": "Гряды",
             "description": "Облака в виде гряд.",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
             "value": "ridge"
           },
           {
             "title": "Пластины",
             "description": "Облака в виде пластин.",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
             "value": "plate"
           },
           {
             "title": "Куполообразные",
             "description": "",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
             "value": "dome-shaped"
           },
           {
             "title": "Слоистые",
             "description": "",
-            "image": [
-              "sample1.jpg",
-              "sample2.jpg",
-              "sample3.jpg"
-            ],
             "value": "stratus"
           }
         ]
@@ -134,32 +96,32 @@
           {
             "title": "Белый",
             "description": "Чистый и белый цвет",
-            "image": "sample.jpg",
-            "value": "white"
+            "value": "white",
+            "image": "https://git.frogling.com/gentlememes/CucumberKB/-/raw/master/know_bases/clouds/images/color/white.jpg"
           },
           {
             "title": "Серый",
             "description": "Серый цвет с темными областями",
-            "image": "sample.jpg",
-            "value": "gray"
+            "value": "gray",
+            "image": "https://git.frogling.com/gentlememes/CucumberKB/-/raw/master/know_bases/clouds/images/color/gray.jpg"
           },
           {
             "title": "Темно серый",
             "description": "Очень темные серые облака, плохо пропускающие свет",
-            "image": "sample.jpg",
-            "value": "dark_gray"
+            "value": "dark_gray",
+            "image": "https://git.frogling.com/gentlememes/CucumberKB/-/raw/master/know_bases/clouds/images/color/dark_gray.jpg"
           },
           {
             "title": "Черные",
             "description": "Черные облака, аж жутко",
-            "image": "sample.jpg",
-            "value": "dark"
+            "value": "dark",
+            "image": "https://git.frogling.com/gentlememes/CucumberKB/-/raw/master/know_bases/clouds/images/color/black.jpg"
           },
           {
             "title": "Синеватые",
             "description": "Синеватые облака",
-            "image": "sample.jpg",
-            "value": "bluish"
+            "value": "bluish",
+            "image": "https://git.frogling.com/gentlememes/CucumberKB/-/raw/master/know_bases/clouds/images/color/bluish.jpg"
           }
         ]
       },
