@@ -77,7 +77,7 @@ export async function bucketSolve(prevState: any, formData: FormData) {
     ...JSON.parse(formData.get("object")! as string),
   }
 
-  // console.log(data)
+  console.log(data)
 
   // formData.set("data", "123");
 

@@ -2,6 +2,7 @@
 
 import { useFormState, useFormStatus } from 'react-dom'
 import { useState, useEffect } from 'react'
+import Select from "react-select";
 
 function QueryLabel(props: any) {
   return (
@@ -33,26 +34,54 @@ function QueryEntry(props: any) {
 }
 
 function QueryEntryBool(props: any) {
-  function updateQuery(e: any) {
+  function updateQuery(selected: any) {
     let q = JSON.parse(props.query);
-    if (e.target.value == "true") {
-      q["data"][e.target.name] = true;
-    } else if (e.target.value == "false") {
-      q["data"][e.target.name] = false;
+    if (selected.value == "true") {
+      q["data"][props.item.param] = true;
+    } else if (selected.value == "false") {
+      q["data"][props.item.param] = false;
     } else {
-      q["data"][e.target.name] = null;
+      q["data"][props.item.param] = null;
     }
     props.setQuery(JSON.stringify(q))
     console.log(props.query)
   }
 
+  const options = [
+    { value: "null", label: "Неизвестно", icon: "fa-question" },
+    { value: "true", label: "Да", icon: "fa-check" },
+    { value: "false", label: "Нет", icon: "fa-close" }
+  ];
+
+  const formatOptionLabel = ({ label, icon }: any) => (
+    <div className="flex items-center ">
+      <i className={`fa ${icon} mr-2`} aria-hidden="true" />
+      <div>{label}</div>
+    </div>
+  );
+
   return (
     <div>
-      <select className="w-full border border-gray-600 bg-gray-700 rounded-md px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono" name={props.item.param} onChange={updateQuery}>
-        <option value="null">Неизвестно</option>
-        <option value="true">Да</option>
-        <option value="false">Нет</option>
-      </select>
+      <Select
+        name={props.item.param}
+        defaultValue={options[0]}
+        options={options}
+        onChange={updateQuery}
+        isSearchable={false}
+        formatOptionLabel={formatOptionLabel}
+        unstyled
+        styles={{
+          control: (base, props) => {
+            base.minHeight = 0;
+            return base;
+          }
+        }}
+        classNames={{
+          container: () => "w-full border border-gray-600 bg-gray-700 rounded-md px-3 caret-green-600 font-mono",
+          menu: () => "w-full border border-gray-600 bg-gray-700 rounded-md caret-green-600 font-mono",
+          option: () => "hover:bg-gray-600 px-3 py-1"
+        }}
+      />
     </div>
   )
 }
