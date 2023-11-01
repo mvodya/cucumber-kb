@@ -87,29 +87,55 @@ function QueryEntryBool(props: any) {
 }
 
 function QueryEntryEnum(props: any) {
-  function updateQuery(e: any) {
+  function updateQuery(selected: any) {
     let q = JSON.parse(props.query);
-    if (e.target.value == "null") {
-      q["data"][e.target.name] = null;
+    if (selected.value == "null") {
+      q["data"][props.item.param] = null;
     } else {
-      q["data"][e.target.name] = e.target.value;
+      q["data"][props.item.param] = selected.value;
     }
     props.setQuery(JSON.stringify(q))
     console.log(props.query)
   }
 
   const options = props.item.spec.data.map((option: any) => {
-    return (
-      <option key={option.value} value={option.value}>{option.title}</option>
-    )
+    return { value: option.value, label: option.title, description: option.description }
   })
+  options.unshift({ value: "null", label: "Неизвестно", description: "" })
+
+  const formatOptionLabel = ({ label, value, description }: any) => (
+    <div className="flex flex-col">
+      <div className=''>
+        {value == "null" &&
+          <i className={`fa fa-question mr-2`} aria-hidden="true" />
+        }
+        {label}
+      </div>
+      <div className='text-gray-400'>{description}</div>
+    </div>
+  );
 
   return (
     <div>
-      <select className="w-full border border-gray-600 bg-gray-700 rounded-md px-3 focus:outline-none focus:border-green-700 caret-green-600 selection:bg-green-700 font-mono" name={props.item.param} onChange={updateQuery}>
-        <option value="null">Неизвестно</option>
-        {options}
-      </select>
+      <Select
+        name={props.item.param}
+        defaultValue={options[0]}
+        options={options}
+        onChange={updateQuery}
+        formatOptionLabel={formatOptionLabel}
+        unstyled
+        styles={{
+          control: (base, props) => {
+            base.minHeight = 0;
+            return base;
+          }
+        }}
+        classNames={{
+          container: () => "w-full border border-gray-600 bg-gray-700 rounded-md px-3 caret-green-600 font-mono",
+          menu: () => "w-full border border-gray-600 bg-gray-700 rounded-md caret-green-600 font-mono",
+          option: () => "hover:bg-gray-600 px-3 py-1"
+        }}
+      />
     </div>
   )
 }
