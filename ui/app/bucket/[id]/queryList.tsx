@@ -99,17 +99,26 @@ function QueryEntryEnum(props: any) {
   }
 
   const options = props.item.spec.data.map((option: any) => {
-    return { value: option.value, label: option.title, description: option.description }
+    return { value: option.value, label: option.title, description: option.description, image: option.image }
   })
   options.unshift({ value: "null", label: "Неизвестно", description: "" })
 
-  const formatOptionLabel = ({ label, value, description }: any) => (
+  const formatOptionLabel = ({ label, value, description, image }: any) => (
     <div className="flex flex-col">
-      <div className=''>
-        {value == "null" &&
-          <i className={`fa fa-question mr-2`} aria-hidden="true" />
+      <div className='flex flex-row'>
+        { image &&
+          <div className='flex mr-2 my-1'>
+            <div className='w-10 h-10 '>
+              <img className='object-cover w-10 h-10 rounded-sm' src={image} />
+            </div>
+          </div>
         }
-        {label}
+        <div className={`${image && "mt-1"}`}>
+          {value == "null" &&
+            <i className={`fa fa-question mr-2`} aria-hidden="true" />
+          }
+          {label}
+        </div>
       </div>
       <div className='text-gray-400'>{description}</div>
     </div>
