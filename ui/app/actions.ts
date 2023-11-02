@@ -2,7 +2,13 @@
 
 import { redirect } from 'next/navigation'
 
+import * as Sentry from "@sentry/nextjs";
+
 export async function createBucket(prevState: any, formData: FormData) {
+  const transaction = Sentry.startTransaction({
+    name: "Create bucket"
+  });
+
   const title = formData.get("title");
   const description = formData.get("description");
 
@@ -17,12 +23,17 @@ export async function createBucket(prevState: any, formData: FormData) {
 
   // console.log(bucket)
 
+  transaction.finish();
+
   if (bucket.id) {
     redirect(`/bucket/${bucket.id}`)
   }
 }
 
 export async function getBucket(id: string) {
+  const transaction = Sentry.startTransaction({
+    name: "Get bucket"
+  });
   // const title = formData.get("title");
   // const description = formData.get("description");
 
@@ -37,10 +48,16 @@ export async function getBucket(id: string) {
 
   // console.log(bucket)
 
+  transaction.finish();
+
   return bucket
 }
 
 export async function updateBucketData(prevState: any, formData: FormData) {
+  const transaction = Sentry.startTransaction({
+    name: "Update bucket data",
+  });
+
   const id = formData.get("id");
   const data = {
     data: JSON.parse(formData.get("data")! as string),
@@ -61,6 +78,8 @@ export async function updateBucketData(prevState: any, formData: FormData) {
   })
   const bucket = await respone.json()
 
+  transaction.finish();
+
   console.log("UPD")
   // console.log(bucket)
 
@@ -72,6 +91,10 @@ export async function updateBucketData(prevState: any, formData: FormData) {
 }
 
 export async function bucketSolve(prevState: any, formData: FormData) {
+  const transaction = Sentry.startTransaction({
+    name: "Bucket solve",
+  });
+
   const id = formData.get("id");
   const data = {
     ...JSON.parse(formData.get("object")! as string),
@@ -97,6 +120,9 @@ export async function bucketSolve(prevState: any, formData: FormData) {
 
   console.log("SOLVE")
   console.log({...solve.response})
+
+  transaction.finish();
+
   return {...solve.response}
 
   // redirect(`/bucket/${bucket.id}`)
