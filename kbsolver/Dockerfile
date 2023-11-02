@@ -2,7 +2,7 @@ FROM python:3.11-slim-bullseye
 
 WORKDIR /app
 
-RUN pip3 install flask gunicorn pylint
+RUN pip3 install flask gunicorn pylint 'sentry-sdk[flask]'
 
 COPY . /app
 
