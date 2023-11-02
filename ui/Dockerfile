@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
-RUN apt-get update -y \
-    && apt-get install ca-certificates \
+RUN apt-get update \
+    && apt-get install -y ca-certificates \
     && apt-get clean
 
 RUN npm ci \
