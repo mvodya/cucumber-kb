@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN apt-get update \
+RUN apt-get update -y \
     && apt-get install ca-certificates \
     && apt-get clean
 
