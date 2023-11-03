@@ -3,7 +3,7 @@ DB_PASSWORD=dbpassword
 DB_DATABASE=cucumberkb
 
 # Sentry
-SENTRY_ENVIRONMENT=production
+SENTRY_ENVIRONMENT=development
 SENTRY_DSN_UI=https://605ae37d7d8c53470c10c28272fa855c@dsn.frogling.com/2
 SENTRY_DSN_API=https://3347ce77e43574b2a2c4a6e4fec88833@dsn.frogling.com/3
 SENTRY_DSN_KBSOLVER=https://57792b43c338a4841b0266dc4962823a@dsn.frogling.com/4

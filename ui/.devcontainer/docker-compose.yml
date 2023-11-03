@@ -8,23 +8,29 @@ services:
     links:
       - db
       - api
-    env_file: ../.env
+    env_file: ../../.envdev
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN_UI}
 
   api:
     build: ../../api
     links:
       - db
       - kbsolver
-    env_file: ../.env
+    env_file: ../../.envdev
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN_API}
 
   kbsolver:
     build: ../../kbsolver
     restart: always
-    env_file: ../.env
+    env_file: ../../.envdev
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN_KBSOLVER}
 
   db:
     image: postgres
     restart: always
     volumes:
       - ../data/db:/var/lib/postgresql/data
-    env_file: ../.env
+    env_file: ../../.envdev

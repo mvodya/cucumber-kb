@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
+ENV SENTRY_DSN=$SENTRY_DSN_API
+
 RUN apt-get update \
     && apt-get install -y ca-certificates \
     && apt-get clean

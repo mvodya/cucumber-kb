@@ -4,6 +4,7 @@ import { ObjectReq } from './objectreq.entity';
 import { Bucket } from 'src/bucket/bucket.entity';
 import { CreateObjectReqDto } from './dto/create-objectreq.dto';
 import { HttpService } from '@nestjs/axios';
+import * as Sentry from '@sentry/node';
 
 @Injectable()
 export class ObjectReqService {
@@ -16,6 +17,11 @@ export class ObjectReqService {
   ) { }
 
   async create(id: string, createObjectReqDto: CreateObjectReqDto): Promise<ObjectReq> {
+    const transaction = Sentry.startTransaction({
+      op: "objreq.create",
+      name: "Create new object request",
+    });
+
     const bucket = await this.bucketRepository.findOneBy({ id: id });
     if (bucket == null) throw new NotFoundException("Bucket not found")
 
@@ -43,25 +49,54 @@ export class ObjectReqService {
       throw new BadRequestException("KbSolver Error")
     });
 
-    return await this.objectReqRepository.save(objectreq);
+    const r = this.objectReqRepository.save(objectreq);
+
+    transaction.finish();
+
+    return await r;
   }
 
   async findOne(id: string): Promise<ObjectReq> {
-    return this.objectReqRepository.findOneBy({ id: id });
+    const transaction = Sentry.startTransaction({
+      op: "objreq.findone",
+      name: "Get object request",
+    });
+
+    const r = this.objectReqRepository.findOneBy({ id: id });
+
+    transaction.finish();
+
+    return r;
   }
 
   async findAllByBucket(id: string): Promise<ObjectReq[]> {
+    const transaction = Sentry.startTransaction({
+      op: "objreq.findall",
+      name: "Get list of object requests for bucket",
+    });
+
     const bucket = await this.bucketRepository.findOne({ where: { id: id }, relations: ["objectreqs"] });
     if (bucket == null) throw new NotFoundException("Bucket not found")
 
-    return bucket.objectreqs;
+    const r = bucket.objectreqs;
+
+    transaction.finish();
+
+    return r;
   }
 
   async removeAllByBucket(id: string) {
+    const transaction = Sentry.startTransaction({
+      op: "objreq.removeall",
+      name: "Clear all object requests for bucket",
+    });
+
     const bucket = await this.bucketRepository.findOne({ where: { id: id }, relations: ["objectreqs"] });
     if (bucket == null) throw new NotFoundException("Bucket not found")
 
     this.objectReqRepository.delete({ bucket: bucket })
+
+    transaction.finish();
 
     return [];
   }
