@@ -6,6 +6,8 @@ services:
       - db
       - api
     env_file: .env
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN_UI}
     networks:
       - proxy
       - internal
@@ -22,6 +24,8 @@ services:
       - db
       - kbsolver
     env_file: .env
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN_API}
     networks:
       - internal
 
@@ -29,6 +33,8 @@ services:
     image: registry.frogling.com/gentlememes/cucumberkb/kbsolver:latest
     restart: always
     env_file: .env
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN_UI}
     networks:
       - internal
 

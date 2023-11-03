@@ -7,7 +7,8 @@ import { SentryFilter } from './sentry.filter';
 
 async function bootstrap() {
   Sentry.init({
-    dsn: process.env.SENTRY_DNS,
+    dsn: process.env.SENTRY_DSN_API,
+    tracesSampleRate: 1.0,
   });
 
   const app = await NestFactory.create(AppModule);

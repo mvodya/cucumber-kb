@@ -8,6 +8,7 @@ kbsolver-build:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
+    - source .env
     - docker build --pull -t "$DOCKER_IMAGE_NAME" ./kbsolver
     - docker push "$DOCKER_IMAGE_NAME"
     - |
@@ -26,6 +27,7 @@ api-build:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
+    - source .env
     - docker build --pull -t "$DOCKER_IMAGE_NAME" ./api
     - docker push "$DOCKER_IMAGE_NAME"
     - |
@@ -44,6 +46,7 @@ ui-build:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
+    - source .env
     - docker build --pull -t "$DOCKER_IMAGE_NAME" ./ui
     - docker push "$DOCKER_IMAGE_NAME"
     - |

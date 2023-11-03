@@ -4,6 +4,7 @@ import { Bucket } from './bucket.entity';
 import { CreateBucketDto } from './dto/create-bucket.dto';
 import { UpdateDataBucketDto } from './dto/updateData-bucket.dto';
 import { UpdateBucketDto } from './dto/update-bucket.dto';
+import * as Sentry from '@sentry/node';
 
 @Injectable()
 export class BucketService {
@@ -13,14 +14,28 @@ export class BucketService {
   ) {}
 
   async create(createBucketDto: CreateBucketDto): Promise<Bucket> {
+    const transaction = Sentry.startTransaction({
+      op: "bucket.create",
+      name: "Create new bucket",
+    });
+
     const bucket = new Bucket();
     bucket.title = createBucketDto.title;
     bucket.description = createBucketDto.description;
 
-    return this.bucketRepository.save(bucket);
+    const r = this.bucketRepository.save(bucket);
+
+    transaction.finish();
+
+    return r;
   }
 
   async update(id: string, updateBucketDto: UpdateBucketDto): Promise<Bucket> {
+    const transaction = Sentry.startTransaction({
+      op: "bucket.update",
+      name: "Update basic bucket data",
+    });
+
     let bucket = await this.bucketRepository.findOneBy({ id: id });
 
     if (bucket == null) throw new NotFoundException("Bucket not found")
@@ -28,10 +43,19 @@ export class BucketService {
     if (updateBucketDto.title != null) bucket.title = updateBucketDto.title;
     if (updateBucketDto.description != null) bucket.description = updateBucketDto.description;
 
-    return this.bucketRepository.save(bucket);
+    const r = this.bucketRepository.save(bucket);
+
+    transaction.finish();
+
+    return r;
   }
 
   async updateData(id: string, updateDataBucketDto: UpdateDataBucketDto): Promise<Bucket> {
+    const transaction = Sentry.startTransaction({
+      op: "bucket.updatedata",
+      name: "Update data & model for bucket",
+    });
+
     let bucket = await this.bucketRepository.findOneBy({ id: id });
 
     if (bucket == null) throw new NotFoundException("Bucket not found")
@@ -39,14 +63,36 @@ export class BucketService {
     if (updateDataBucketDto.model != null) bucket.model = updateDataBucketDto.model;
     if (updateDataBucketDto.data != null) bucket.data = updateDataBucketDto.data;
 
-    return this.bucketRepository.save(bucket);
+    const r = this.bucketRepository.save(bucket);
+
+    transaction.finish();
+
+    return r;
   }
 
   async findOne(id: string): Promise<Bucket> {
-    return this.bucketRepository.findOneBy({ id: id });
+    const transaction = Sentry.startTransaction({
+      op: "bucket.findone",
+      name: "Get one bucket",
+    });
+
+    const r = this.bucketRepository.findOneBy({ id: id });
+
+    transaction.finish();
+
+    return r;
   }
 
   async findAll(): Promise<Bucket[]> {
-    return this.bucketRepository.find();
+    const transaction = Sentry.startTransaction({
+      op: "bucket.findall",
+      name: "Get list of buckets",
+    });
+
+    const r = this.bucketRepository.find();
+
+    transaction.finish();
+
+    return r;
   }
 }
