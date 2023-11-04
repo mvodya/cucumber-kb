@@ -1,14 +1,21 @@
 import json
 
 def solve(model, data, obj):
+
+    for param in model['schema']:
+        if param['param'] not in obj:
+            obj[param['param']] = None
+
     stack = {}
 
     def stack_flush():
         for s in data['stack']:
             stack[s['id']] = []
 
-    def stack_result(id, result, score):
+    def stack_result(id, result, score, explain, bypass):
         result['score'] = score
+        result['explain'] = explain
+        result['bypass'] = bypass
         stack[id].append(result)
 
     class Node():
@@ -34,7 +41,6 @@ def solve(model, data, obj):
                     self.nodes.append(Node(g, depth + 1))
             except:
                 pass
-
 
             match self.type:
                 case 'condition':
@@ -64,13 +70,14 @@ def solve(model, data, obj):
         def execute_condition(self):
             true_count = 0
             global_score = 0
+            explain = []
+            bypass = []
 
             for statement in self.statements:
                 try:
                     st_score = statement['score']
                 except:
                     st_score = 0
-
 
                 if statement['param'] in obj:
                     if obj[statement['param']] is not None:
@@ -88,53 +95,60 @@ def solve(model, data, obj):
                                     if float(ost) > float(dst):
                                         true_count += 1
                                         global_score += st_score
+                                        explain.append(statement)
                                 case '<':
                                     if float(ost) < float(dst):
                                         true_count += 1
                                         global_score += st_score
+                                        explain.append(statement)
                                 case '=':
                                     if ost == dst:
                                         true_count += 1
                                         global_score += st_score
+                                        explain.append(statement)
                                 case '>=':
                                     if float(ost) >= float(dst):
                                         true_count += 1
                                         global_score += st_score
+                                        explain.append(statement)
                                 case '<=':
                                     if float(ost) <= float(dst):
                                         true_count += 1
                                         global_score += st_score
+                                        explain.append(statement)
                                 case '!=':
                                     if float(ost) != float(dst):
                                         true_count += 1
                                         global_score += st_score
+                                        explain.append(statement)
                                 case _:
                                     pass
                     else:
                         if not statement['require']:
                             true_count += 1
+                            bypass.append(statement)
             
-            if true_count > 0:
-                self.execute_nodes(global_score + self.score)
+            if true_count == len(self.statements):
+                self.execute_nodes(global_score + self.score, explain, bypass)
 
-        def execute(self, score = 0):
+        def execute(self, explain = [], score = 0, bypass = []):
             self.score = score
 
             match self.type:
                 case 'report':
                     if 'requireScore' in self.report:
                         if self.report['requireScore'] <= self.score:
-                            stack_result(self.stack, self.report, self.score)
+                            stack_result(self.stack, self.report, self.score, explain, bypass)
                             self.execute_nodes(self.score)
                     else:
-                        stack_result(self.stack, self.report, self.score)
+                        stack_result(self.stack, self.report, self.score, explain, bypass)
                         self.execute_nodes(self.score)
                 case 'condition':
                     self.execute_condition()
         
-        def execute_nodes(self, score):
+        def execute_nodes(self, score, explain = [], bypass = []):
             for n in self.nodes:
-                n.execute(score)
+                n.execute(explain, score, bypass)
 
     stack_flush()
 
