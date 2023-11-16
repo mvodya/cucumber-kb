@@ -67,10 +67,10 @@ def solve(model, data, obj):
                 info = n.debug_info()
                 print('     ' * n.depth + str(info))
 
-        def execute_condition(self):
+        def execute_condition(self, explain = []):
             true_count = 0
             global_score = 0
-            explain = []
+            explain = explain
             bypass = []
 
             for statement in self.statements:
@@ -134,6 +134,7 @@ def solve(model, data, obj):
         def execute(self, explain = [], score = 0, bypass = []):
             self.score = score
 
+
             match self.type:
                 case 'report':
                     if 'requireScore' in self.report:
@@ -144,7 +145,7 @@ def solve(model, data, obj):
                         stack_result(self.stack, self.report, self.score, explain, bypass)
                         self.execute_nodes(self.score)
                 case 'condition':
-                    self.execute_condition()
+                    self.execute_condition(explain)
         
         def execute_nodes(self, score, explain = [], bypass = []):
             for n in self.nodes:
